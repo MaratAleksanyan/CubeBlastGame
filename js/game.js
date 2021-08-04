@@ -38,7 +38,7 @@ stepsEllips.src = "img/ellipse.png";
 
 //
 
-// Audion for game
+// Audio for game
 let clickThePage = new Audio();
 let winGame = new Audio();
 let lostGame = new Audio();
@@ -57,11 +57,11 @@ let blockWidth,
 	moves = 30;
 	isMoved = false;
 
-//Chnged blocks
+// Blocks to be swapped
 let block_A;
 let block_B;
 
-// Drowing page
+// Drawing page
 function draw(){
 	ctx.drawImage(main, 0, 0);
 	ctx.drawImage(mainProgressRect, 1000, 0);
@@ -104,7 +104,7 @@ function draw(){
 	}
 }
 
-// Filling blocks array 
+// Fill an array with blocks 
 function fillField(pos){
 	for(let i = 0; i <= 4; i++){
 		let item = block[Math.floor(Math.random() * block.length)];
@@ -119,7 +119,7 @@ function fillField(pos){
 
 stepsEllips.onload = draw;
 
-// Click each block in game
+// Click event each block in game
 cvs.addEventListener("click", event => {
 	let foundedNeighbours = [],
 		x = event.layerX,
@@ -136,7 +136,7 @@ cvs.addEventListener("click", event => {
 	if(blockIndex != -1){
 		clickThePage.play();
 
-		// Find clicked block neighbours by same color
+		// We are looking for neighbors by the color of the selected block
 		let rightNb =  blockArr.find(elem => elem.cordX == blockArr[blockIndex].cordX + blockWidth && elem.cordY == blockArr[blockIndex].cordY && elem.color == blockArr[blockIndex].color);
 		let leftNb =  blockArr.find(elem => elem.cordX == blockArr[blockIndex].cordX - blockWidth && elem.cordY == blockArr[blockIndex].cordY && elem.color == blockArr[blockIndex].color);
 		let topNb =  blockArr.find(elem => elem.cordX == blockArr[blockIndex].cordX && elem.cordY == blockArr[blockIndex].cordY - blockHeight && elem.color == blockArr[blockIndex].color);
@@ -205,7 +205,7 @@ cvs.addEventListener("click", event => {
 
 		reDraw();
 
-		// Wait a sec. and fill empty spaces
+		// Wwait for half a second and fill in the empty spaces after deleting
 		setTimeout(function (){
 			let emptySpaces = getEmptySpaces();
 
@@ -221,6 +221,7 @@ cvs.addEventListener("click", event => {
 			reDraw();
 		}, 500);
 
+		// After filling in, we check whether there are available moves
 		setTimeout(function (){
 			if(moves == 0 && isWayToBurnTheTiles() === undefined){
 				palyGameLostAudio();
@@ -243,6 +244,7 @@ cvs.addEventListener("mousedown", function(e){
 
 cvs.addEventListener('mousemove', () => isMoved = true);
 
+// Swapping blocks with each other
 cvs.addEventListener("mouseup", function(e){
 
 	let blockIndex = blockArr.findIndex(elem => elem.cordX + blockWidth > e.layerX && elem.cordY + blockHeight > e.layerY);
