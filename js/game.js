@@ -190,11 +190,11 @@ cvs.addEventListener("click", event => {
 
 		foundedNeighbours = [...new Set(foundedNeighbours)].sort((a, b) => a - b);
 
-		if(progress < 460){
-			if(foundedNeighbours.length > 1 && foundedNeighbours.length <= 4) progress += foundedNeighbours.length * 2;
-			if(foundedNeighbours.length > 4 && foundedNeighbours.length <= 6) progress += foundedNeighbours.length * 3;
-			if(foundedNeighbours.length > 6) progress += foundedNeighbours.length * 5;
-		}else{
+		if(foundedNeighbours.length > 1 && foundedNeighbours.length <= 4) progress += foundedNeighbours.length * 2;
+		if(foundedNeighbours.length > 4 && foundedNeighbours.length <= 6) progress += foundedNeighbours.length * 3;
+		if(foundedNeighbours.length > 6) progress += foundedNeighbours.length * 5;
+
+		if(progress >= 460){
 			playGameWinAudio();
 		}
 
