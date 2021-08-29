@@ -1,3 +1,6 @@
+import images from './js/loadImages.js';
+import mp3Files from './js/loadMP3.js';
+
 // Create canvas
 const cvs = document.getElementById("blast");
 const ctx = cvs.getContext("2d");
@@ -8,33 +11,33 @@ const main = new Image(),
 	redBlock = new Image(),
 	yellowBlock = new Image(),
 	purpleBlock = new Image(),
-	greenBlock = new Image();
-	mainProgressRect = new Image();
-	roundedRect = new Image();
-	roundedRectLiveProgress = new Image();
-	progressText = new Image();
-	pointsMainRect = new Image();
-	pointsRoundedRect = new Image();
-	pointsText = new Image();
-	stepsEllips = new Image();
+	greenBlock = new Image(),
+	mainProgressRect = new Image(),
+	roundedRect = new Image(),
+	roundedRectLiveProgress = new Image(),
+	progressText = new Image(),
+	pointsMainRect = new Image(),
+	pointsRoundedRect = new Image(),
+	pointsText = new Image(),
+	stepsEllips = new Image(),
 	movesRect = new Image();
 
 
-main.src = "img/main.png";
-blueBlock.src = "img/blue.png";
-redBlock.src = "img/red.png";
-yellowBlock.src = "img/yellow.png";
-purpleBlock.src = "img/purple.png";
-greenBlock.src = "img/green.png";
-mainProgressRect.src = "img/rounded-rectangle-5.png";
-roundedRect.src = "img/rounded-rectangle.png";
-roundedRectLiveProgress.src = "img/rounded-rectangle-progress.png";
-progressText.src = "img/progress.png";
-pointsMainRect.src = "img/points-main.png";
-pointsRoundedRect.src = "img/rounded-rectangle-points.png";
-pointsText.src = "img/points.png";
-movesRect.src = "img/moves.png";
-stepsEllips.src = "img/ellipse.png";
+main.src = images.main;
+blueBlock.src = images.blueBlock;
+redBlock.src = images.redBlock;
+yellowBlock.src = images.yellowBlock;
+purpleBlock.src = images.purpleBlock;
+greenBlock.src = images.greenBlock;
+mainProgressRect.src = images.mainProgressRect;
+roundedRect.src = images.roundedRect;
+roundedRectLiveProgress.src = images.roundedRectLiveProgress;
+progressText.src = images.progressText;
+pointsMainRect.src = images.pointsMainRect;
+pointsRoundedRect.src = images.pointsRoundedRect;
+pointsText.src = images.pointsText;
+movesRect.src = images.movesRect;
+stepsEllips.src = images.stepsEllips;
 
 //
 
@@ -43,9 +46,9 @@ let clickThePage = new Audio();
 let winGame = new Audio();
 let lostGame = new Audio();
 
-clickThePage.src = "audio/sfx-2.mp3";
-winGame.src = "audio/win.mp3";
-lostGame.src = "audio/lose.mp3";
+clickThePage.src = mp3Files.click;
+winGame.src = mp3Files.win;
+lostGame.src = mp3Files.lose;
 //
 
 let blockWidth,
@@ -53,8 +56,8 @@ let blockWidth,
 	block = [blueBlock, redBlock, yellowBlock, purpleBlock, greenBlock],
 	blockArr = [],
 	progress = 0,
-	steps = 45;
-	moves = 30;
+	steps = 45,
+	moves = 30,
 	isMoved = false;
 
 // Blocks to be swapped
@@ -238,7 +241,7 @@ cvs.addEventListener("mousedown", function(e){
 	
 	let blockIndex = blockArr.findIndex(elem => elem.cordX + blockWidth > e.layerX && elem.cordY + blockHeight > e.layerY);
 
-	if(blockIndex != -1 && moves > 0){
+	if(blockIndex !== -1 && moves > 0){
 		isMoved = false;
 		block_A = blockArr[blockIndex];
 	}
